@@ -1,1 +1,257 @@
+body {
+    background: #952D32;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+div#container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+div#div_ellipse1 {
+    z-index: 1;
+    width: 37.6%;
+    height: 56.2%;
+    position: absolute;
+    top:-34.1%;
+    left: 9.48%;
+}
+
+div#div_ellipse2 {
+    z-index: 1;
+    width: 32.08%;
+    height: 51.12%;
+    position: absolute;
+    top:-5.925%;
+    left: 58.02%;
+}
+
+div#div_ellipse3 {
+    z-index: 1;
+    width: 80.83%;
+    height: 128.80%;
+    position: absolute;
+    top: 37.69%;
+    left: 45.36%;
+}
+
+div#div_ellipse4 {
+    z-index: 1;
+    width: 61.77%;
+    height: 92.5%;
+    position: absolute;
+    top: 40.09%;
+    left: -30%;
+}
+
+.svg_ellipse {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 28px #681117);
+}
+
+ellipse {
+    fill: #99181E;
+}
+
+div#div_grid {
+    width: 56.67%;
+    height: 76.20%;
+    position: absolute;
+    left: 33.96%;
+    top: 11.9%;
+}
+
+div#div_grid_bg {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+svg#svg_grid_bg {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+rect#grid_bg {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    fill: #5D6C7A;
+}
+
+div#div_grid_img {
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+div#div_grid_border {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 4;
+}
+
+svg#svg_grid_border {
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    overflow: visible;
+}
+
+rect#grid_border {
+    fill: transparent;
+    stroke: #12192C;
+    stroke-width: 17pt;
+    filter: drop-shadow(0 0 11px rgba(9, 3, 28, 0.95));
+}
+
+div#div_line {
+    z-index: 3;
+    width: 19.53%;
+    height: 0.3em;
+    position: absolute;
+    left: 6.67%;
+    top: 50%;
+}
+
+svg#svg_line {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    overflow: visible;
+}
+
+line {
+    stroke: #D7D7D8;
+    stroke-width: 0.2em;
+    filter: drop-shadow(0 0 11px rgba(229, 229, 229, 0.95));
+}
+
+div#div_you {
+    width: 7.8125%;
+    top: 28%;
+}
+
+div#div_enemy {
+    width: 12.265%;
+    top: 60.3%;
+}
+
+.div_player_text {
+    z-index: 3;   
+    position: absolute;
+    left: 8.9%;
+    height: 13.8%;
+    display: table;
+}
+
+.player_text {
+    color: #D7D7D8;
+    font-family: SF-Compact-Bold;
+    font-size: 2.7em;
+    margin: 0;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div#div_you_circle {
+    width: 2.344%;
+    height: 4.1667%;
+    position: absolute;
+    left: 19.5%;
+    top: 33%;
+    z-index: 3;
+}
+
+div#div_enemy_circle {
+    width: 2.344%;
+    height: 4.1667%;
+    position: absolute;
+    left: 19.5%;
+    top: 65.4%;
+    z-index: 3;
+}
+
+.svg_circle {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    overflow: visible;
+}
+
+circle#you_circle {
+    fill: #0000FF;
+}
+
+circle#enemy_circle {
+    fill: #FF0000;
+}
+
+div#div_player_turn_rect1 {
+    top: 28.2%;
+    left: 5.9%;
+    position: absolute;
+    z-index: 3;
+    width: 19.53%;
+    height: 13.8%;
+    overflow: visible;
+}
+
+div#div_player_turn_rect2 {
+    top: 60.5%;
+    left: 5.9%;
+    position: absolute;
+    z-index: 3;
+    width: 19.53%;
+    height: 13.8%;
+    overflow: visible;
+}
+
+.svg_player_turn_rect {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    overflow: visible;
+}
+
+.player_turn_rect {
+    stroke: #D7D7D8;
+    fill: transparent;
+    stroke-width: 5pt;
+    z-index: 3;
+}
+
+
+
+
+
+@font-face {
+    font-family: SF-Compact-Bold;
+    src: url(SF-Compact-Display-Bold.otf);
+}
+
+@font-face {
+    font-family: SF-Compact-Light;
+    src: url(SF-Compact-Display-Light.otf);
+}
+
+@font-face {
+    font-family: SF-Compact-Heavy;
+    src: url(SF-Compact-Display-Heavy.otf);
+}
 
