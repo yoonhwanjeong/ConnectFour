@@ -3,6 +3,7 @@ body {
     width: 100vw;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
 }
 
 div#container {
@@ -20,8 +21,35 @@ div#div_ellipse1 {
     left: 9.48%;
 }
 
+div#div_ellipse2 {
+    z-index: 1;
+    width: 32.08%;
+    height: 51.12%;
+    position: absolute;
+    top:-5.925%;
+    left: 58.02%;
+}
 
-svg#ellipse1 {
+div#div_ellipse3 {
+    z-index: 1;
+    width: 80.83%;
+    height: 128.80%;
+    position: absolute;
+    top: 37.69%;
+    left: 45.36%;
+}
+
+div#div_ellipse4 {
+    z-index: 1;
+    width: 61.77%;
+    height: 92.5%;
+    position: absolute;
+    top: 40.09%;
+    left: -30%;
+}
+
+
+.svg_ellipse {
     width: 100%;
     height: 100%;
     filter: drop-shadow(0 0 28px #681117);
@@ -31,7 +59,7 @@ ellipse {
     fill: #99181E;
 }
 
-div#div_rect1 {
+div#div_main_rect {
     z-index: 2;
     width: 87.7%;
     height: 79.1%;
@@ -40,12 +68,267 @@ div#div_rect1 {
     left: 6.07%;
 }
 
-svg#rect1 {
+svg#svg_main_rect {
     width: 100%;
     height: 100%;
     filter: drop-shadow(0 0 22px rgba(9, 3, 28, 0.82));
 }
 
-rect {
+rect#main_rect {
     fill: #0B1129;
+}
+
+div#div_rect1 {
+    z-index: 3;
+    width: 22.2%;
+    height: 11.85%;
+    position: absolute;
+    top: 73.43%;
+    left: 8.6%;
+}
+
+div#div_rect2 {
+    z-index: 3;
+    width: 22.2%;
+    height: 11.85%;
+    position: absolute;
+    top: 73.43%;
+    left: 38.88%;
+}
+
+
+div#div_rect3 {
+    z-index: 3;
+    width: 22.2%;
+    height: 11.85%;
+    position: absolute;
+    top: 73.43%;
+    left: 68.84%;
+}
+
+
+.svg_small_rect {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 10px rgba(7, 10, 17, 0.5));
+}
+
+.small_rect {
+    z-index: 3;
+    fill: #1D2942;
+}
+
+div#div_start_button {
+    z-index: 3;
+    width: 33.18%;
+    height: 9.9%;
+    position: absolute;
+    top: 40.28%;
+    left: 33.39%;
+}
+
+
+p#start_text {
+    font-family: SF-Compact-Heavy;
+    font-size: 2em; 
+}
+
+div#div_how_to_button {
+    z-index: 3;
+    width: 23.96%;
+    height: 6.57%;
+    position: absolute;
+    top: 51.94%;
+    left: 37.99%;
+}
+
+p#how_to_text {
+    font-family: SF-Compact-Heavy;
+    font-size: 1.5em;
+}
+
+.button_text_container {
+    z-index: 4;
+    text-align: center;
+    display: table;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.button_text {
+    display: table-cell;
+    vertical-align: middle;
+    z-index: 5;
+}
+
+.svg_button {
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 10px rgba(48, 80, 142, 0.25));
+}
+
+.rect_button {
+    z-index: 3;
+    fill: #29427F
+}
+
+p#title_text {
+    z-index: 3;
+    width: 100%;
+    height: 100%;  
+    display: table-cell;
+    vertical-align: middle; 
+    text-shadow: 0 0 4px #F2F2F4;
+    font-family: SF-Compact-Bold;
+    font-size: 3.67em; 
+}
+
+div#div_title_text {
+    width: 30.1%;
+    height: 14.3%;
+    display: table;
+    position: absolute;
+    top: 15.834%;
+    left: 34.94%;
+    z-index: 3;
+    overflow: hidden;
+}
+
+p#challenge_text {
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    font-family: SF-Compact-Light;
+    font-size: 1.2em;
+}
+
+div#div_challenge_text {
+    width: 18.49%;
+    height: 4.22%;
+    position: absolute;
+    left: 40.754%;
+    top: 28.1%;
+    z-index: 4;
+    overflow: hidden;
+}
+
+.stats_text_container {
+    z-index: 4;
+    text-align: center;
+    width: 100%;
+    height: 37.04%;
+    display: table;
+    position: absolute;
+    bottom: 7%;
+}
+
+.stats_text {
+    z-index: 4;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    font-family: SF-Compact-Heavy;
+    font-size: 1em;
+}
+
+.stats_num_container {
+    z-index: 4;
+    width: 100%;
+    height: 65.6%;
+    text-align: center;
+    display: table;
+    position: absolute;
+    top: 2%;
+}
+
+.stats_num {
+    z-index: 4;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    font-family: SF-Compact-Heavy;
+    font-size: 2.2em;
+    color: #E2E0E0;
+}
+
+
+
+/* div#div_start_text {
+    width: 18.87%;
+    height: 7.72%;
+    display: flex;
+    position: absolute;
+    left: 40.54%;
+    top: 41.42%;
+    z-index: 4;
+} */
+
+p {
+    color: #E2E0E0;
+    margin: auto;
+    text-align: center;
+}
+
+
+
+
+div#div_line1 {
+    z-index: 3;
+    width: 18.85%;
+    height: 0.0833em;
+    position: absolute;
+    top: 28.1%;
+    left: 6.12%;
+}
+
+div#div_line2 {
+    z-index: 3;
+    width: 18.85%;
+    height: 0.0833em;
+    position: absolute;
+    top: 28.1%;
+    left: 74.974%;
+}
+
+.svg_line {
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+line {
+    z-index: 3;
+    stroke: #E2E0E0;
+    stroke-width: 1pt;
+}
+
+
+
+
+
+
+
+
+
+@font-face {
+    font-family: SF-Compact-Bold;
+    src: url(SF-Compact-Display-Bold.otf);
+}
+
+@font-face {
+    font-family: SF-Compact-Light;
+    src: url(SF-Compact-Display-Light.otf);
+}
+
+@font-face {
+    font-family: SF-Compact-Heavy;
+    src: url(SF-Compact-Display-Heavy.otf);
 }
