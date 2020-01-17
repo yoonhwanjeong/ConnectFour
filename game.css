@@ -111,13 +111,13 @@ svg#svg_grid_border {
     height: 100%;
     z-index: 4;
     overflow: visible;
+    filter: drop-shadow(0 0 11px rgba(9, 3, 28, 0.95));
 }
 
 rect#grid_border {
     fill: transparent;
     stroke: #12192C;
     stroke-width: 17pt;
-    filter: drop-shadow(0 0 11px rgba(9, 3, 28, 0.95));
 }
 
 div#div_line {
@@ -134,12 +134,12 @@ svg#svg_line {
     height: 100%;
     z-index: 3;
     overflow: visible;
+    filter: drop-shadow(0 0 11px rgba(229, 229, 229, 0.95));
 }
 
 line {
     stroke: #D7D7D8;
     stroke-width: 0.2em;
-    filter: drop-shadow(0 0 11px rgba(229, 229, 229, 0.95));
 }
 
 div#div_you {
@@ -250,11 +250,11 @@ svg#svg_time_rect {
     height: 100%;
     z-index: 3;
     overflow: visible;
+    filter: drop-shadow(0 0 22px rgba(9, 3, 28, 0.82));
 }
 
 rect#time_rect {
     fill: #0B1129;
-    filter: drop-shadow(0 0 22px rgba(9, 3, 28, 0.82));
 }
 
 
