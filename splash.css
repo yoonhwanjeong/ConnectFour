@@ -1,18 +1,22 @@
 body {
     background: #952D32;
-    width: 1366px;
-    height: 768px;
+    min-width: 1366px;
+    width: 100vw;
+    min-height: 768px;
+    height: 100vh;
     margin: 0;
 }
 
 div#bottom {
     position: absolute;
-    width: 1366px;
-    height: 768px;
+    min-width: 1366px;
+    width: 100%;
+    min-height: 768px;
+    height: 100%;
     overflow: hidden;
 }
 
-@media all and (min-width: 1366px) and (min-height: 768px) {
+/* @media all and (min-width: 1366px) and (min-height: 768px) {
     body {
         background: #952D32;
         width: 100vw;
@@ -25,7 +29,7 @@ div#bottom {
         width: 100%;
         height: 100%;
     }
-}
+} */
 
 div#container {
     position: relative;
