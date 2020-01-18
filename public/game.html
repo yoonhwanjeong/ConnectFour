@@ -2,35 +2,35 @@
 <html>
     <head>
         <title>Connect 4</title>
-        <link rel="stylesheet" href="game.css"/>
+        <link rel="stylesheet" href="stylesheets/game.css"/>
     </head>
     <body>
         <div id="container">
             <div id="div_ellipse1">
                 <svg class="svg_ellipse">
-                    <ellipse rx="50%" cx="50%" cy="50%" ry="50%" />
+                    <ellipse class="background" rx="50%" cx="50%" cy="50%" ry="50%" />
                 </svg>
             </div>
             <div id="div_ellipse2">
                 <svg class="svg_ellipse">
-                    <ellipse rx="50%" cx="50%" cy="50%" ry="50%" />
+                    <ellipse class="background" rx="50%" cx="50%" cy="50%" ry="50%" />
                 </svg>
             </div>
             <div id="bottom">
                 <div id="div_ellipse3">
                     <svg class="svg_ellipse">
-                        <ellipse rx="50%" cx="50%" cy="50%" ry="50%" />
+                        <ellipse class="background" rx="50%" cx="50%" cy="50%" ry="50%" />
                     </svg>
                 </div>
                 <div id="div_ellipse4">
                     <svg class="svg_ellipse">
-                        <ellipse rx="50%" cx="50%" cy="50%" ry="50%" />
+                        <ellipse class="background" rx="50%" cx="50%" cy="50%" ry="50%" />
                     </svg>
                 </div>
             </div>
             <div id="div_grid">
                 <div id="div_grid_img">
-                    <img src="grid.png"/>
+                    <img src="data/grid.png"/>
                 </div>
                 <div id="div_grid_bg">
                     <svg id="svg_grid_bg">
@@ -82,6 +82,31 @@
             <div id="div_time">
                 <p id="time">xx : xx</p>
             </div>
+
+            <svg class="chip enemy row-2 col-3">
+                <ellipse id="test1" rx="24%" cx="50%" cy="50%" ry="44%"/>
+            </svg>
+            <svg class="chip player row-4 col-6">
+                <ellipse id="test2" rx="24%" cx="50%" cy="50%" ry="44%"/>
+            </svg>
+            <svg class="chip player row-2 col-0">
+                <ellipse id="test3" rx="24%" cx="50%" cy="50%" ry="44%" />
+            </svg>
+
+            <div class="click_div_col div_col-3">
+            </div>
+
+            <!-- <div id="pop_up_bg">
+                <div id="pop_up">
+                    <p class="pop_up_text">Congratulations you won!</p>
+                    <div id="play_again_button">
+                        <p class="pop_up_text" id="play_again_text">PLAY AGAIN</p>
+                    </div>
+                    <p class="pop_up_text">Waiting for a second player...</p>
+                    <img id="loading" src="data/loading.gif" />
+                </div>
+            </div> -->
         </div>
+
     </body>
 </html>

@@ -343,15 +343,15 @@ line {
 
 @font-face {
     font-family: SF-Compact-Bold;
-    src: url(SF-Compact-Display-Bold.otf);
+    src: url(../data/SF-Compact-Display-Bold.otf);
 }
 
 @font-face {
     font-family: SF-Compact-Light;
-    src: url(SF-Compact-Display-Light.otf);
+    src: url(../data/SF-Compact-Display-Light.otf);
 }
 
 @font-face {
     font-family: SF-Compact-Heavy;
-    src: url(SF-Compact-Display-Heavy.otf);
+    src: url(../data/SF-Compact-Display-Heavy.otf);
 }

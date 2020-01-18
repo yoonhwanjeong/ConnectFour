@@ -36,7 +36,7 @@
             </div>
             <div id="div_rect1">
                 <div class="stats_num_container">
-                    <span class="stats_num" id="games_completed_num">0</span>
+                    <span class="stats_num" id="games_completed_num"><%= gamesCompleted %></span>
                 </div>
                 <div class="stats_text_container">
                     <p class="stats_text" id="games_completed_text">Games completed</p>
@@ -47,7 +47,7 @@
             </div>
             <div id="div_rect2">
                 <div class="stats_num_container">
-                    <span class="stats_num" id="ongoing_games_num">0</span>
+                    <span class="stats_num" id="ongoing_games_num"><%= gamesInitialized %></span>
                 </div>
                 <div class="stats_text_container">
                     <p class="stats_text" id="ongoing_games_text">Ongoing games</p>
@@ -58,10 +58,10 @@
             </div>
             <div id="div_rect3">
                 <div class="stats_num_container">
-                    <span class="stats_num" id="games_won_num">0</span>
+                    <span class="stats_num" id="games_won_num"><%= gamesWon %></span>
                 </div>
                 <div class="stats_text_container">
-                    <p class="stats_text" id="games_won_text">Hours played</p>
+                    <p class="stats_text" id="games_won_text">Games won</p>
                 </div>
                 <svg class="svg_small_rect">
                     <rect class="small_rect" width="100%" height="100%" rx="43px" ry="43px" x="0%" y="0%" />
