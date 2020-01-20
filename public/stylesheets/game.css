@@ -454,11 +454,19 @@ div#play_again_button {
     display: none;
 }
 
+div#play_again_button:hover{
+    background-color: #3060BF;
+}
+
 p#play_again_text {
     font-size: 1em;
     display: table-cell;
     z-index: 9;
     vertical-align: middle;
+}
+
+div.click_div_col:active {
+    background-color: rgba(0, 0, 0, 0.24);
 }
 
 @font-face {

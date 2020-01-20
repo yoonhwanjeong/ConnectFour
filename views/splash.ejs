@@ -3,7 +3,7 @@
 <head>
     <title>Connect 4</title>
     <link rel="stylesheet" href="stylesheets/splash.css"/>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
 <div id="container">
@@ -104,7 +104,7 @@
 
     <div id="pop_up_bg">
         <div id="pop_up">
-            <p class="pop_up_text" id="pretty_easy">It's pretty easy!</p>
+            <p class="pop_up_text pseudo" id="pretty_easy">It's pretty easy!</p>
             <p class="pop_up_text" id="explanation1">Drop your chips in to the columns and</p>
             <p class="pop_up_text" id="explanation2">try to align 4 of your own chips verticaly, horizontaly or diagonally before your opponent does!</p>
             <div id="back_button" onclick="closeBox()">
@@ -112,6 +112,11 @@
             </div>
         </div>
     </div>
+
+    <div class="alert">
+        YOUR SCREEN IS TOO SMALL!
+      </div> 
+
 
 </div>
 <script src="javascripts/splash.js"></script>
