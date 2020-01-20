@@ -17,5 +17,5 @@ app.use(express.static(__dirname + "/public"));
 app.get("/play", indexRounter);
 
 app.get("/", (req, res) => {
-    
+
 })

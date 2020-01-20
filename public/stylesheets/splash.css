@@ -334,7 +334,73 @@ line {
 }
 
 
+div#pop_up_bg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color:rgba(0, 0, 0, 0.66);
+    z-index: 7;
+}
 
+div#pop_up {
+    height: 40%;
+    width: 50%;
+    position: absolute;
+    z-index: 8;
+    background-image: linear-gradient(to bottom right, rgb(41, 201, 201), teal);
+    left: 25%;
+    top: 25%;
+    text-align: center;
+    border-radius: 26px;    
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.75));
+}
+
+p.pop_up_text {
+    font-family: SF-Compact-Bold;
+    font-size: 2em;
+    color: white;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.48));
+}
+
+p#explanation1 {
+    font-size: 1em;
+    position: absolute;
+    top: 44%;
+    width: 100%;
+}
+
+p#explanation2 {
+    font-size: 1em;
+    position: absolute;
+    top: 54%;
+    width: 100%;
+}
+
+p#pretty_easy {
+    width: 100%;
+    top: 18%;
+    position: absolute;
+}
+
+div#back_button {
+    display: table;
+    background-color: #12192C;
+    border-radius: 20px;
+    width: 17%;
+    height: 14%;
+    left: 41.3%;
+    top: 73%;
+    filter: drop-shadow(0 0 7px rgba(0, 0, 0, 0.5));
+    font-family: SF-Compact-Heavy;
+    position: absolute;
+    font-size: 0.8em;
+    z-index: 8;
+}
+
+p#back_button {
+    display: table-cell;
+    vertical-align: middle;
+}
 
 
 
