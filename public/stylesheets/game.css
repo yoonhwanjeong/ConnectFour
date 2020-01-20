@@ -17,19 +17,6 @@ div#bottom {
     overflow: hidden;
 }
 
-/* @media all and (min-width: 1366px) and (min-height: 768px) {
-    body {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-    }
-    
-    div#bottom {
-        width: 100%;
-        height: 100%;
-    }
-} */
-
 div#container {
     position: relative;
     width: 100%;
@@ -177,7 +164,7 @@ div#div_enemy {
 }
 
 .div_player_text {
-    z-index: 3;   
+    z-index: 3;
     position: absolute;
     left: 8.9%;
     height: 13.8%;
@@ -302,33 +289,6 @@ p#time {
     padding-bottom: 2%;
 }
 
-/* svg#svg_test1 {
-    width: 12%;
-    height: 12%;
-    position: absolute;
-    left: 56.36%;
-    top: 38.43%;
-    z-index: 2;
-}
-
-svg#svg_test2 {
-    width: 12%;
-    height: 12%;
-    position: absolute;
-    left: 33.26%;
-    top: 15.37%;
-    z-index: 2;
-}
-
-svg#svg_test3 {
-    width: 12%;
-    height: 12%;
-    position: absolute;
-    left: 33.26%;
-    top: 26.9%;
-    z-index: 2;
-} */
-
 svg.chip {
     width: 12%;
     height: 12%;
@@ -338,13 +298,13 @@ svg.chip {
 
 svg.enemy {
     fill:#FF0000;
-    stroke:#FF0000; 
+    stroke:#FF0000;
     stroke-width: 7px
 }
 
 svg.player {
     fill:#0000FF;
-    stroke:#0000FF; 
+    stroke:#0000FF;
     stroke-width: 7px
 }
 
@@ -357,7 +317,7 @@ svg.row-1 {
 }
 
 svg.row-2 {
-    top: 38.43%;   
+    top: 38.43%;
 }
 
 svg.row-3 {
@@ -436,13 +396,13 @@ div.div_col-6 {
     left: 81.9%;
 }
 
-
 div#pop_up_bg {
     height: 100%;
     width: 100%;
     position: absolute;
     background-color:rgba(0, 0, 0, 0.66);
     z-index: 7;
+    display: none;
 }
 
 div#pop_up {
@@ -453,9 +413,9 @@ div#pop_up {
     background-image: linear-gradient(to bottom right, rgb(41, 201, 201), teal);
     left: 25%;
     top: 25%;
-    display: table; 
+    display: table;
     text-align: center;
-    border-radius: 26px;    
+    border-radius: 26px;
     filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.75));
 }
 
@@ -475,6 +435,7 @@ img#loading {
     top: 66%;
     left: 48%;
     filter: drop-shadow(0 0 7px rgba(250, 230, 230, 0.3));
+    display: none;
 }
 
 div#play_again_button {
@@ -490,6 +451,7 @@ div#play_again_button {
     position: absolute;
     font-size: 1.2em;
     z-index: 8;
+    display: none;
 }
 
 p#play_again_text {
@@ -498,9 +460,6 @@ p#play_again_text {
     z-index: 9;
     vertical-align: middle;
 }
-
-
-
 
 @font-face {
     font-family: SF-Compact-Bold;
@@ -516,4 +475,3 @@ p#play_again_text {
     font-family: SF-Compact-Heavy;
     src: url(../data/SF-Compact-Display-Heavy.otf);
 }
-

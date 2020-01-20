@@ -16,21 +16,6 @@ div#bottom {
     overflow: hidden;
 }
 
-/* @media all and (min-width: 1366px) and (min-height: 768px) {
-    body {
-        background: #952D32;
-        width: 100vw;
-        height: 100vh;
-        margin: 0;
-        overflow: hidden;
-    }
-    
-    div#bottom {
-        width: 100%;
-        height: 100%;
-    }
-} */
-
 div#container {
     position: relative;
     width: 100%;
@@ -72,7 +57,6 @@ div#div_ellipse4 {
     top: 40.09%;
     left: -30%;
 }
-
 
 .svg_ellipse {
     width: 100%;
@@ -121,7 +105,6 @@ div#div_rect2 {
     left: 38.88%;
 }
 
-
 div#div_rect3 {
     z-index: 3;
     width: 22.2%;
@@ -130,7 +113,6 @@ div#div_rect3 {
     top: 73.43%;
     left: 68.84%;
 }
-
 
 .svg_small_rect {
     width: 100%;
@@ -152,10 +134,9 @@ div#div_start_button {
     left: 33.39%;
 }
 
-
 p#start_text {
     font-family: SF-Compact-Heavy;
-    font-size: 2em; 
+    font-size: 2em;
 }
 
 div#div_how_to_button {
@@ -202,12 +183,12 @@ p#how_to_text {
 p#title_text {
     z-index: 3;
     width: 100%;
-    height: 100%;  
+    height: 100%;
     display: table-cell;
-    vertical-align: middle; 
+    vertical-align: middle;
     text-shadow: 0 0 4px #F2F2F4;
     font-family: SF-Compact-Bold;
-    font-size: 3.67em; 
+    font-size: 3.67em;
 }
 
 div#div_title_text {
@@ -283,24 +264,11 @@ div#div_challenge_text {
     color: #E2E0E0;
 }
 
-
-
-/* div#div_start_text {
-    width: 18.87%;
-    height: 7.72%;
-    display: flex;
-    position: absolute;
-    left: 40.54%;
-    top: 41.42%;
-    z-index: 4;
-} */
-
 p {
     color: #E2E0E0;
     margin: auto;
     text-align: center;
 }
-
 
 div#div_line1 {
     z-index: 3;
@@ -340,6 +308,7 @@ div#pop_up_bg {
     position: absolute;
     background-color:rgba(0, 0, 0, 0.66);
     z-index: 7;
+    display: none;
 }
 
 div#pop_up {
@@ -351,7 +320,7 @@ div#pop_up {
     left: 25%;
     top: 25%;
     text-align: center;
-    border-radius: 26px;    
+    border-radius: 26px;
     filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.75));
 }
 
@@ -397,15 +366,10 @@ div#back_button {
     z-index: 8;
 }
 
-p#back_button {
+p#back_button_text {
     display: table-cell;
     vertical-align: middle;
 }
-
-
-
-
-
 
 @font-face {
     font-family: SF-Compact-Bold;

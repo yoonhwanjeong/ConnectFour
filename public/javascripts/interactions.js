@@ -1,73 +1,89 @@
-var Messages = require("messages.js");
+function Game(socket, board, timer, messageBox) {
+    console.assert(typeof socket === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof socket);
+    console.assert(typeof board === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof board);
+    console.assert(typeof timer === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof timer);
+    console.assert(typeof messageBox === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof messageBox);
+    this.gameId = -1;
+    this.socket = socket;
+    this.board = board;
+    this.timer = timer;
+    this.messageBox = messageBox;
+    this.isTurn = false;
 
-function Game(socket) {
-    this.fields = [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]];
-    this.isOver = false;
-    this.canPlay = false;
-
-    this.setIsOver = function (isOver) {
-        console.assert(typeof isOver === "boolean", "%s: Expected a boolean, got a %s", arguments.callee.name, typeof isOver);
-        this.isOver = isOver;
-        if (isOver) {
-
-        } else {
-
+    this.update = (column, player) => {
+        console.assert(typeof column === "number", "%s: Expected a number but got a %s", arguments.callee.name, typeof column);
+        console.assert(typeof player === "number", "%s: Expected a number but got a %s", arguments.callee.name, typeof player);
+        if (column >= 0 && column < 7 && this.board.fields[column][0] < 6 && player >= 0 && player < 2 && (this.isTurn || player === 1) && !this.board.isOver()) {
+            var row = 5 - this.board.fields[column][0];
+            this.board.setField(row, column, player);
+            if (player === 0) {
+                var message = Messages.PLAY;
+                message.gameId = this.gameId;
+                message.data = column;
+                this.socket.send(JSON.stringify(message));
+            }
+        }
+        if (this.board.isOver()) {
+            this.timer.stop();
+            var message = Messages.RESULT;
+            message.gameId = this.gameId;
+            if (this.board.hasWinner()) {
+                if (this.board.isWinner(0)) {
+                    this.messageBox.setMessage(Status["gameWon"]);
+                    message.data = "player";
+                } else {
+                    this.messageBox.setMessage(Status["gameLost"]);
+                    message.data = "opponent";
+                }
+            } else {
+                this.messageBox.setMessage(Status["gameDrew"]);
+            }
+            this.socket.send(JSON.stringify(message));
         }
     };
 
-    this.setCanPlay = function (canPlay) {
-        console.assert(typeof canPlay === "boolean", "%s: Expected a boolean, got a %s", arguments.callee.name, typeof canPlay);
-        this.canPlay = canPlay;
-        var on = "div_player_turn_rect";
-        var off = "div_player_turn_rect";
-        if (canPlay) {
-            on += 1;
-            off += 2;
-        } else {
-            on += 2;
-            off += 1;
-        }
-        document.getElementById(on).style.display = "";
-        document.getElementById(off).style.display = "none";
-    };
-
-    this.play = function (column) {
-        console.assert(typeof column === "number", "%s: Expected a number, got a %s", arguments.callee.name, typeof column);
-        if (column >= 0 && column <= 6 && !this.isOver && this.canPlay && this.fields[column][0] < 6) {
-            var row = 5 - fields[column][0];
-            fields[column][row + 1] = 1;
-            fields[column][0]++;
-            var ellipse = document.createElement("ellipse");
-            ellipse.cx = "50%";
-            ellipse.cy = "50%";
-            ellipse.rx = "24%";
-            ellipse.ry = "44%";
-            var svg = document.createElement("svg");
-            svg.className = "chip player row-" + row + " col-" + column;
-            svg.appendChild(ellipse);
-            document.getElementById("container").appendChild(svg);
-            this.setCanPlay(false);
-            var play = Messages.PLAY;
-            play.data = column;
-            socket.send(JSON.stringify(play));
-        }
+    this.setTurn = (isTurn) => {
+        this.isTurn = isTurn;
+        this.board.setTurn(isTurn);
     };
 }
 
 (function setup() {
     var socket = new WebSocket(Setup.WEB_SOCKET_URL);
-    var game = new Game(socket);
+
+    var board = new Board();
+    var timer = new Timer();
+    var messageBox = new MessageBox();
+
+    var game = new Game(socket, board, timer, messageBox);
+
+    (function registerClickables(game) {
+        var clickables = document.getElementById("clickables").children;
+        for (var i = 0; i < clickables.length; i++) {
+            var item = clickables.item(i);
+            var column = parseInt(item.getAttribute("data-column"));
+            item.onclick = ((game, column) => {
+                return () => game.update(column, 0);
+            })(game, column);
+        }
+    })(game);
+
     socket.onmessage = function (event) {
         var message = JSON.parse(event.data);
-        if (message.type === Messages.TURN.type) {
-            game.setCanPlay(true);
+        if (message.type === Messages.WAIT.type) {
+            console.log(message);
+            messageBox.setMessage(Status["waiting"], false);
+        } else if (message.type === Messages.START.type) {
+            console.log(message);
+            messageBox.close();
+            timer.start();
+            game.gameId = message.gameId;
+        } else if (message.type === Messages.TURN.type) {
+            console.log(message);
+            game.setTurn(message.data);
         } else if (message.type === Messages.PLAY.type) {
-            var row = 5 - game.fields[message.data][0];
-            fields[message.data][row + 1] = 2;
-            fields[message.data][0]++;
-            game.setCanPlay(true);
-        } else if (message.type === Messages.GAME_OVER.type) {
-
+            console.log(message);
+            game.update(message.data, 1);
         }
     };
 
@@ -76,6 +92,11 @@ function Game(socket) {
     };
 
     socket.onclose = function () {
+        if (!game.board.isOver()) {
+            timer.stop();
+            messageBox.setMessage(Status["aborted"]);
+        }
+    };
 
-    }
+    socket.onerror = function () {};
 })();
