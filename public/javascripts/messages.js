@@ -8,8 +8,8 @@
     };
 
     exports.START = {
-      type: "START",
-      gameId: null
+        type: "START",
+        gameId: null
     };
 
     exports.TURN = {
@@ -18,15 +18,15 @@
     };
 
     exports.PLAY = {
-      type: "PLAY",
-      gameId: null,
-      data: null
+        type: "PLAY",
+        gameId: null,
+        data: null
     };
 
     exports.RESULT = {
-      type: "RESULT",
-      gameId: null,
-      data: null
+        type: "RESULT",
+        gameId: null,
+        data: null
     };
 
     exports.ERROR = {

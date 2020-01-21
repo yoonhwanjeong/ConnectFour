@@ -1,124 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Connect 4</title>
     <link rel="stylesheet" href="stylesheets/splash.css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-<div id="container">
-    <div id="div_ellipse1">
-        <svg class="svg_ellipse">
-            <ellipse rx="50%" cx="50%" cy="50%" ry="50%" />
-        </svg>
-    </div>
-    <div id="div_ellipse2">
-        <svg class="svg_ellipse">
-            <ellipse rx="50%" cx="50%" cy="50%" ry="50%" />
-        </svg>
-    </div>
-    <div id="bottom">
-        <div id="div_ellipse3">
+    <div id="container">
+        <div id="div_ellipse1">
             <svg class="svg_ellipse">
-                <ellipse rx="50%" cx="50%" cy="50%" ry="50%" />
+                <ellipse class="background" rx="50%" cx="50%" cy="50%" ry="50%" />
             </svg>
         </div>
-        <div id="div_ellipse4">
+        <div id="div_ellipse2">
             <svg class="svg_ellipse">
-                <ellipse rx="50%" cx="50%" cy="50%" ry="50%" />
+                <ellipse class="background" rx="50%" cx="50%" cy="50%" ry="50%" />
             </svg>
         </div>
-    </div>
-    <div id="div_main_rect">
-        <svg id="svg_main_rect">
-            <rect id="main_rect" width="100%" height="100%" rx="67px" ry="67px" x="0%" y="0%" />
-        </svg>
-    </div>
-    <div id="div_rect1">
-        <div class="stats_num_container">
-            <span class="stats_num" id="games_completed_num"><%= gamesCompleted %></span>
+        <div id="bottom">
+            <div id="div_ellipse3">
+                <svg class="svg_ellipse">
+                    <ellipse class="background" rx="50%" cx="50%" cy="50%" ry="50%" />
+                </svg>
+            </div>
+            <div id="div_ellipse4">
+                <svg class="svg_ellipse">
+                    <ellipse class="background" rx="50%" cx="50%" cy="50%" ry="50%" />
+                </svg>
+            </div>
         </div>
-        <div class="stats_text_container">
-            <p class="stats_text" id="games_completed_text">Games completed</p>
+        <div id="div_main_rect">
+            <svg id="svg_main_rect">
+                <rect id="main_rect" width="100%" height="100%" rx="67px" ry="67px" x="0%" y="0%" />
+            </svg>
         </div>
-        <svg class="svg_small_rect">
-            <rect class="small_rect" width="100%" height="100%" rx="43px" ry="43px" x="0%" y="0%" />
-        </svg>
-    </div>
-    <div id="div_rect2">
-        <div class="stats_num_container">
-            <span class="stats_num" id="ongoing_games_num"><%= gamesOngoing %></span>
+        <div id="div_rect1">
+            <div class="stats_num_container">
+                <span class="stats_num" id="games_completed_num"><%= gamesCompleted %></span>
+            </div>
+            <div class="stats_text_container">
+                <p class="stats_text" id="games_completed_text">Games completed</p>
+            </div>
+            <svg class="svg_small_rect">
+                <rect class="small_rect" width="100%" height="100%" rx="43px" ry="43px" x="0%" y="0%" />
+            </svg>
         </div>
-        <div class="stats_text_container">
-            <p class="stats_text" id="ongoing_games_text">Ongoing games</p>
+        <div id="div_rect2">
+            <div class="stats_num_container">
+                <span class="stats_num" id="ongoing_games_num"><%= gamesOngoing %></span>
+            </div>
+            <div class="stats_text_container">
+                <p class="stats_text" id="ongoing_games_text">Ongoing games</p>
+            </div>
+            <svg class="svg_small_rect">
+                <rect class="small_rect" width="100%" height="100%" rx="43px" ry="43px" x="0%" y="0%" />
+            </svg>
         </div>
-        <svg class="svg_small_rect">
-            <rect class="small_rect" width="100%" height="100%" rx="43px" ry="43px" x="0%" y="0%" />
-        </svg>
-    </div>
-    <div id="div_rect3">
-        <div class="stats_num_container">
-            <span class="stats_num" id="games_won_num"><%= hoursPlayed %></span>
+        <div class="pointer button-with-sound" id="div_rect3">
+            <div id="div_times_visited">
+                <div class="stats_num_container">
+                    <span class="stats_num" id="times_visited_num"><%= timesVisited %></span>
+                </div>
+                <div class="stats_text_container">
+                    <p class="stats_text" id="times_visited_text">Times visited</p>
+                </div>
+            </div>
+            <div id="div_hours_played">
+                <div class="stats_num_container">
+                    <span class="stats_num" id="hours_played_num"><%= hoursPlayed.toFixed(1) %></span>
+                </div>
+                <div class="stats_text_container">
+                    <p class="stats_text" id="hours_played_text">Hours played</p>
+                </div>
+            </div>
+            <svg class="svg_small_rect">
+                <rect class="small_rect" width="100%" height="100%" rx="43px" ry="43px" x="0%" y="0%" />
+            </svg>
         </div>
-        <div class="stats_text_container">
-            <p class="stats_text" id="games_won_text">Hours played</p>
-        </div>
-        <svg class="svg_small_rect">
-            <rect class="small_rect" width="100%" height="100%" rx="43px" ry="43px" x="0%" y="0%" />
-        </svg>
-    </div>
-    <a href="/play">
-        <div id="div_start_button">
+        <a href="/play">
+            <div class="button-with-sound" id="div_start_button">
+                <div class="button_text_container">
+                    <p class="button_text" id="start_text">START GAME</p>
+                </div>
+                <svg class="svg_button">
+                    <rect class="rect_button" width="100%" height="100%" rx="44px" ry="44px" x="0%" y="0%"/>
+                </svg>
+            </div>
+        </a>
+        <div class="pointer button-with-sound" id="div_how_to_button" onclick="show()">
             <div class="button_text_container">
-                <p class="button_text" id="start_text">START GAME</p>
+                <p class="button_text" id="how_to_text">HOW - TO</p>
             </div>
             <svg class="svg_button">
-                <rect class="rect_button" width="100%" height="100%" rx="44px" ry="44px" x="0%" y="0%"/>
+                <rect class="rect_button" width="100%" height="100%" rx="34px" ry="34px" x="0%" y="0%"/>
             </svg>
         </div>
-    </a>
-    <div id="div_how_to_button" onclick="show()">
-        <div class="button_text_container">
-            <p class="button_text" id="how_to_text">HOW - TO</p>
+        <div id="div_title_text">
+            <p id="title_text">CONNECT 4</p>
         </div>
-        <svg class="svg_button">
-            <rect class="rect_button" width="100%" height="100%" rx="34px" ry="34px" x="0%" y="0%"/>
-        </svg>
-    </div>
-    <div id="div_title_text">
-        <p id="title_text">CONNECT 4</p>
-    </div>
-    <div id="div_challenge_text">
-        <p id="challenge_text">challenge your friends :)</p>
-    </div>
-    <div id="div_line1">
-        <svg class="svg_line">
-            <line x1="0" y1="0" x2="100%" y2="0"/>
-        </svg>
-    </div>
-    <div id="div_line2">
-        <svg class="svg_line">
-            <line x1="0" y1="0" x2="100%" y2="0"/>
-        </svg>
-    </div>
-
-    <div id="pop_up_bg">
-        <div id="pop_up">
-            <p class="pop_up_text pseudo" id="pretty_easy">It's pretty easy!</p>
-            <p class="pop_up_text" id="explanation1">Drop your chips in to the columns and</p>
-            <p class="pop_up_text" id="explanation2">try to align 4 of your own chips verticaly, horizontaly or diagonally before your opponent does!</p>
-            <div id="back_button" onclick="closeBox()">
-                <p class="pop_up_text" id="back_button_text">Back</p>
+        <div id="div_challenge_text">
+            <p id="challenge_text">challenge your friends :)</p>
+        </div>
+        <div id="div_line1">
+            <svg class="svg_line">
+                <line x1="0" y1="0" x2="100%" y2="0"/>
+            </svg>
+        </div>
+        <div id="div_line2">
+            <svg class="svg_line">
+                <line x1="0" y1="0" x2="100%" y2="0"/>
+            </svg>
+        </div>
+        <div id="pop_up_bg">
+            <div id="pop_up">
+                <p class="pop_up_text" id="pretty_easy">It's pretty easy!</p>
+                <p class="pop_up_text" id="explanation1">Drop your chips in to the columns and</p>
+                <p class="pop_up_text" id="explanation2">try to align 4 of your own chips verticaly, horizontaly or diagonally before your opponent does!</p>
+                <div class="pointer button-with-sound" id="back_button" onclick="closeBox()">
+                    <p class="pop_up_text" id="back_button_text">Back</p>
+                </div>
             </div>
         </div>
+        <div class="alert">
+            YOUR SCREEN IS TOO SMALL!
+        </div>
     </div>
-
-    <div class="alert">
-        YOUR SCREEN IS TOO SMALL!
-    </div> 
-
-
-</div>
-<script src="javascripts/splash.js"></script>
+    <script src="javascripts/splash.js"></script>
+    <script src="javascripts/buttonWithSound.js"></script>
 </body>
 </html>

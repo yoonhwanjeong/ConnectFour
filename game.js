@@ -1,9 +1,9 @@
 const game = function (id) {
-  this.id = id;
-  this.state = "0 PLAYER";
-  this.startTime = 0;
-  this.endTime = 0;
-  this.players = [];
+    this.id = id;
+    this.state = "0 PLAYER";
+    this.startTime = 0;
+    this.endTime = 0;
+    this.players = [];
 };
 
 game.prototype.states = {};
@@ -16,26 +16,26 @@ game.prototype.states["NO WINNER"] = 5;
 game.prototype.states["PLAYER LEFT"] = 6;
 
 game.prototype.addPlayer = function (connection) {
-  console.assert(typeof connection === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof connection);
-  this.players.push(connection);
-  if (this.states[this.state] === 0) {
-    this.state = "1 PLAYER";
-  } else if (this.states[this.state] === 1) {
-    this.state = "2 PLAYERS";
-  }
+    console.assert(typeof connection === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof connection);
+    this.players.push(connection);
+    if (this.states[this.state] === 0) {
+        this.state = "1 PLAYER";
+    } else if (this.states[this.state] === 1) {
+        this.state = "2 PLAYERS";
+    }
 };
 
 game.prototype.hasTwoConnectedPlayers = function () {
-  return this.states[this.state] === 2;
+    return this.states[this.state] === 2;
 };
 
 game.prototype.announce = function (message) {
-  console.assert(typeof message === "string", "%s: Expected a string but got a %s", arguments.callee.name, typeof message);
-  this.players.forEach(player => player.send(message));
+    console.assert(typeof message === "string", "%s: Expected a string but got a %s", arguments.callee.name, typeof message);
+    this.players.forEach(player => player.send(message));
 };
 
 game.prototype.getHoursPlayed = function () {
-  return Number.parseFloat(((this.endTime - this.startTime) / 3600000).toFixed(1));
+    return Number.parseFloat(((this.endTime - this.startTime) / 3600000).toFixed(1));
 };
 
 module.exports = game;

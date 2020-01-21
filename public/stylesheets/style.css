@@ -1,0 +1,94 @@
+body {
+    background: #952D32;
+    min-width: 1300px;
+    width: 100vw;
+    min-height: 731px;
+    height: 100vh;
+    margin: 0;
+}
+
+#container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#bottom {
+    position: absolute;
+    min-width: 1366px;
+    width: 100%;
+    min-height: 768px;
+    height: 100%;
+    overflow: hidden;
+}
+
+#div_ellipse1 {
+    z-index: 1;
+    width: 37.6%;
+    height: 56.2%;
+    position: absolute;
+    top:-34.1%;
+    left: 9.48%;
+}
+
+#div_ellipse2 {
+    z-index: 1;
+    width: 32.08%;
+    height: 51.12%;
+    position: absolute;
+    top:-5.925%;
+    left: 58.02%;
+}
+
+#div_ellipse3 {
+    z-index: 1;
+    width: 80.83%;
+    height: 128.80%;
+    position: absolute;
+    top: 37.69%;
+    left: 45.36%;
+}
+
+#div_ellipse4 {
+    z-index: 1;
+    width: 61.77%;
+    height: 92.5%;
+    position: absolute;
+    top: 40.09%;
+    left: -30%;
+}
+
+.svg_ellipse {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 28px #681117);
+}
+
+.background {
+    fill: #99181E;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+@media all and (min-width: 1000px) and (min-height: 562.5px) {
+    div.alert {
+        display: none;
+    }
+}
+
+@font-face {
+    font-family: SF-Compact-Bold;
+    src: url(../data/SF-Compact-Display-Bold.otf);
+}
+
+@font-face {
+    font-family: SF-Compact-Light;
+    src: url(../data/SF-Compact-Display-Light.otf);
+}
+
+@font-face {
+    font-family: SF-Compact-Heavy;
+    src: url(../data/SF-Compact-Display-Heavy.otf);
+}

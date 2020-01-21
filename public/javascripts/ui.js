@@ -13,8 +13,8 @@ function Board() {
 
     this.hasRow = (player) => {
         console.assert(typeof player === "number" && player >= 0 && player < 2, "%s: Expected a number between 0 and 1 but got a %s", arguments.callee.name, typeof player);
-        for (var i = 0; i < 6; i++) {
-            for (var j = 0; j < 4; j++) {
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < 4; j++) {
                 if (this.checkFields(player, [[i, j], [i, j + 1], [i, j + 2], [i, j + 3]])) {
                     return true;
                 }
@@ -25,8 +25,8 @@ function Board() {
 
     this.hasColumn = (player) => {
         console.assert(typeof player === "number" && player >= 0 && player < 2, "%s: Expected a number between 0 and 1 but got a %s", arguments.callee.name, typeof player);
-        for (var i = 0; i < 7; i++) {
-            for (var j = 0; j < 3; j++) {
+        for (let i = 0; i < 7; i++) {
+            for (let j = 0; j < 3; j++) {
                 if (this.checkFields(player, [[j, i], [j + 1, i], [j + 2, i], [j + 3, i]])) {
                     return true;
                 }
@@ -36,16 +36,18 @@ function Board() {
     };
 
     this.hasDiagonal = (player) => {
+        let i;
+        let j;
         console.assert(typeof player === "number" && player >= 0 && player < 2, "%s: Expected a number between 0 and 1 but got a %s", arguments.callee.name, typeof player);
-        for (var i = 0; i < 4; i++) {
-            for (var j = 0; j < 3; j++) {
+        for (i = 0; i < 4; i++) {
+            for (j = 0; j < 3; j++) {
                 if (this.checkFields(player, [[i, j], [i + 1, j + 1], [i + 2, j + 2], [i + 3, j + 3]])) {
                     return true;
                 }
             }
         }
-        for (var i = 0; i < 4; i++) {
-            for (var j = 6; j > 2; j--) {
+        for (i = 0; i < 4; i++) {
+            for (j = 6; j > 2; j--) {
                 if (this.checkFields(player, [[i, j], [i + 1, j - 1], [i + 2, j - 2], [i + 3, j - 3]])) {
                     return true;
                 }
@@ -56,7 +58,7 @@ function Board() {
 
     this.isWinner = (player) => {
         console.assert(typeof player === "number" && player >= 0 && player < 2, "%s: Expected a number between 0 and 1 but got a %s", arguments.callee.name, typeof player);
-      return this.hasRow(player) || this.hasColumn(player) || this.hasDiagonal(player);
+        return this.hasRow(player) || this.hasColumn(player) || this.hasDiagonal(player);
     };
 
     this.hasWinner = () => {
@@ -64,23 +66,23 @@ function Board() {
     };
 
     this.isFull = () => {
-        var sum = 0;
-        for (var i = 0; i < 7; i++) {
+        let sum = 0;
+        for (let i = 0; i < 7; i++) {
             sum += this.fields[i][0];
         }
         return sum === 42;
     };
 
     this.isOver = () => {
-      return this.hasWinner() || this.isFull();
+        return this.hasWinner() || this.isFull();
     };
 
     this.setField = (row, column, player) => {
         this.fields[column][row + 1] = player;
         this.fields[column][0]++;
-        var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("class", "chip " + (player === 0 ? "player" : "enemy") + " row-" + row + " col-" + column);
-        var ellipse = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
+        const ellipse = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
         ellipse.setAttribute("cx", "50%");
         ellipse.setAttribute("cy", "50%");
         ellipse.setAttribute("rx", "24%");
@@ -92,8 +94,8 @@ function Board() {
     this.setTurn = (turn) => {
         console.assert(typeof turn === "boolean", "%s: Expected a boolean but got a %s", arguments.callee.name, typeof turn);
         this.turn = turn;
-        var player = document.getElementById("div_player_turn_rect1");
-        var enemy = document.getElementById("div_player_turn_rect2");
+        const player = document.getElementById("div_player_turn_rect1");
+        const enemy = document.getElementById("div_player_turn_rect2");
         if (this.turn) {
             player.style.display = "block";
             enemy.style.display = "none";
@@ -106,19 +108,19 @@ function Board() {
 
 function MessageBox() {
     this.setMessage = function (message, isButtonVisible = true) {
-      document.getElementById("pop_up_text").innerHTML = message;
-      if (!isButtonVisible) {
-          document.getElementById("loading").style.display = "block";
-          document.getElementById("play_again_button").style.display = "none";
-      } else {
-          document.getElementById("loading").style.display = "none";
-          document.getElementById("play_again_button").style.display = "table";
-      }
-      document.getElementById("pop_up_bg").style.display = "table";
+        document.getElementById("pop_up_text").innerHTML = message;
+        if (!isButtonVisible) {
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("play_again_button").style.display = "none";
+        } else {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("play_again_button").style.display = "table";
+        }
+        document.getElementById("pop_up_bg").style.display = "table";
     };
 
     this.close = function () {
-      document.getElementById("pop_up_bg").style.display = "none";
+        document.getElementById("pop_up_bg").style.display = "none";
     };
 }
 
@@ -134,15 +136,15 @@ function Timer() {
     this.start = function () {
         this.reset();
         this.id = setInterval(() => {
-            var time = this.element.innerHTML;
-            var index = time.indexOf(":");
-            var minute = parseInt(time.substring(0, index - 1));
-            var second = parseInt(time.substring(index + 2)) + 1;
+            const time = this.element.innerHTML;
+            const index = time.indexOf(":");
+            let minute = parseInt(time.substring(0, index - 1));
+            let second = parseInt(time.substring(index + 2)) + 1;
             if (second === 60) {
                 minute++;
                 second = 0;
             }
-            this.element.innerHTML = minute + " : " + second;
+            this.element.innerHTML = (minute < 10 ? "0" : "") + minute + " : " + (second < 10 ? "0" : "") + second;
         }, 1000);
     };
 

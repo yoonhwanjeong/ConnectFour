@@ -22,6 +22,7 @@ function Game(socket, board, timer, messageBox) {
                 message.data = column;
                 this.socket.send(JSON.stringify(message));
             }
+            new Audio("../data/chip_fall.wav").play();
         }
         if (this.board.isOver()) {
             this.timer.stop();
@@ -31,9 +32,11 @@ function Game(socket, board, timer, messageBox) {
                 if (this.board.isWinner(0)) {
                     this.messageBox.setMessage(Status["gameWon"]);
                     message.data = "player";
+                    new Audio("../data/game_won.wav").play();
                 } else {
                     this.messageBox.setMessage(Status["gameLost"]);
                     message.data = "opponent";
+                    new Audio("../data/game_lost.wav").play();
                 }
             } else {
                 this.messageBox.setMessage(Status["gameDrew"]);
@@ -46,6 +49,31 @@ function Game(socket, board, timer, messageBox) {
         this.isTurn = isTurn;
         this.board.setTurn(isTurn);
     };
+}
+
+function enterFullscreen() {
+    const element = document.documentElement;
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.mozRequestFullscreen) {
+        element.mozRequestFullscreen();
+    }
+}
+
+function quitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.mozCancelFullscreen) {
+        document.mozCancelFullsreen();
+    }
 }
 
 (function setup() {
@@ -71,18 +99,17 @@ function Game(socket, board, timer, messageBox) {
     socket.onmessage = function (event) {
         var message = JSON.parse(event.data);
         if (message.type === Messages.WAIT.type) {
-            console.log(message);
             messageBox.setMessage(Status["waiting"], false);
         } else if (message.type === Messages.START.type) {
-            console.log(message);
             messageBox.close();
             timer.start();
             game.gameId = message.gameId;
+            const audio = new Audio("../data/gameplay.mp3");
+            audio.loop = true;
+            audio.play();
         } else if (message.type === Messages.TURN.type) {
-            console.log(message);
             game.setTurn(message.data);
         } else if (message.type === Messages.PLAY.type) {
-            console.log(message);
             game.update(message.data, 1);
         }
     };
@@ -95,8 +122,10 @@ function Game(socket, board, timer, messageBox) {
         if (!game.board.isOver()) {
             timer.stop();
             messageBox.setMessage(Status["aborted"]);
+            new Audio("../data/game_aborted.wav");
         }
     };
 
-    socket.onerror = function () {};
+    socket.onerror = function () {
+    };
 })();

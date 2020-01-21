@@ -81,23 +81,23 @@
             </svg>
         </div>
         <div id="div_time">
-            <p id="time">0 : 0</p>
+            <p id="time">00 : 00</p>
         </div>
         <div id="chips"></div>
         <div id="clickables">
-            <div class="click_div_col div_col-0" data-column="0"></div>
-            <div class="click_div_col div_col-1" data-column="1"></div>
-            <div class="click_div_col div_col-2" data-column="2"></div>
-            <div class="click_div_col div_col-3" data-column="3"></div>
-            <div class="click_div_col div_col-4" data-column="4"></div>
-            <div class="click_div_col div_col-5" data-column="5"></div>
-            <div class="click_div_col div_col-6" data-column="6"></div>
+            <div class="click_div_col div_col-0 pointer button-with-sound" data-column="0"></div>
+            <div class="click_div_col div_col-1 pointer button-with-sound" data-column="1"></div>
+            <div class="click_div_col div_col-2 pointer button-with-sound" data-column="2"></div>
+            <div class="click_div_col div_col-3 pointer button-with-sound" data-column="3"></div>
+            <div class="click_div_col div_col-4 pointer button-with-sound" data-column="4"></div>
+            <div class="click_div_col div_col-5 pointer button-with-sound" data-column="5"></div>
+            <div class="click_div_col div_col-6 pointer button-with-sound" data-column="6"></div>
         </div>
         <div id="pop_up_bg">
             <div id="pop_up">
                 <p class="pop_up_text" id="pop_up_text"></p>
                 <img id="loading" src="data/loading.gif" />
-                <div id="play_again_button" onclick="window.location='../'">
+                <div class="pointer button-with-sound" id="play_again_button" onclick="window.location='../'">
                     <p class="pop_up_text" id="play_again_text">PLAY AGAIN</p>
                 </div>
             </div>
@@ -106,10 +106,10 @@
             YOUR SCREEN IS TOO SMALL!
         </div>
         <div>
-            <button id="fullscrn_btn" onclick='body.webkitRequestFullscreen(); document.getElementById("exit_fullscrn_btn").style.display = "block"; document.getElementById("fullscrn_btn").style.display = "none"'>Play fullscreen</button>
+            <button id="fullscrn_btn" onclick='enterFullscreen()'>Play fullscreen</button>
         </div>
         <div>
-            <button id="exit_fullscrn_btn" onclick='document.exitFullscreen(); document.getElementById("fullscrn_btn").style.display = "block"; document.getElementById("exit_fullscrn_btn").style.display = "none"'>Exit fullscreen</button>
+            <button id="exit_fullscrn_btn" onclick='quitFullscreen()'>Exit fullscreen</button>
         </div>
     </div>
     <script src="javascripts/config.js"></script>
@@ -117,5 +117,6 @@
     <script src="javascripts/messages.js"></script>
     <script src="javascripts/ui.js"></script>
     <script src="javascripts/interactions.js"></script>
+    <script src="javascripts/buttonWithSound.js"></script>
 </body>
 </html>
