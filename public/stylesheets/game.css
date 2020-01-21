@@ -1,3 +1,7 @@
+html {
+    background: #ffffff;
+}
+
 body {
     background: #952D32;
     min-width: 1366px;
@@ -5,7 +9,6 @@ body {
     min-height: 768px;
     height: 100vh;
     margin: 0;
-
 }
 
 div#bottom {
@@ -294,6 +297,13 @@ svg.chip {
     height: 12%;
     position: absolute;
     z-index: 2;
+    animation: falling_chip;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(.28,.7,.81,.91);
+}
+
+@keyframes falling_chip {
+    from {top: 0%;}
 }
 
 svg.enemy {
@@ -468,6 +478,41 @@ p#play_again_text {
 div.click_div_col:active {
     background-color: rgba(0, 0, 0, 0.24);
 }
+
+div.alert {
+    font-family: SF-Compact-Heavy;
+    font-size: 2em;
+    position: sticky;
+    width: 100%;
+    background-color: red;
+    color: white;
+    z-index: 1000;
+    text-align: center;
+}
+
+button#fullscrn_btn{
+    z-index: 99;
+    position: absolute;
+}
+
+button#exit_fullscrn_btn {
+    z-index: 99;
+    position: absolute;
+    display: none;
+}
+
+
+@media all and (min-width: 1000px) and (min-height: 562.5px) {
+    div.alert {
+        display: none;
+    }
+}
+
+
+body:fullscreen {
+    background: #BA7276;
+}
+
 
 @font-face {
     font-family: SF-Compact-Bold;

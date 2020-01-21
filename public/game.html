@@ -5,7 +5,7 @@
     <title>Connect 4</title>
     <link rel="stylesheet" href="stylesheets/game.css">
 </head>
-<body>
+<body id="test">
     <div id="container">
         <div id="div_ellipse1">
             <svg class="svg_ellipse">
@@ -101,6 +101,15 @@
                     <p class="pop_up_text" id="play_again_text">PLAY AGAIN</p>
                 </div>
             </div>
+        </div>
+        <div class="alert">
+            YOUR SCREEN IS TOO SMALL!
+        </div>
+        <div>
+            <button id="fullscrn_btn" onclick='body.webkitRequestFullscreen(); document.getElementById("exit_fullscrn_btn").style.display = "block"; document.getElementById("fullscrn_btn").style.display = "none"'>Play fullscreen</button>
+        </div>
+        <div>
+            <button id="exit_fullscrn_btn" onclick='document.exitFullscreen(); document.getElementById("fullscrn_btn").style.display = "block"; document.getElementById("exit_fullscrn_btn").style.display = "none"'>Exit fullscreen</button>
         </div>
     </div>
     <script src="javascripts/config.js"></script>

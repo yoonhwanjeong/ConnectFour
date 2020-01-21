@@ -7,10 +7,6 @@ body {
     margin: 0;
 }
 
-body:fullscreen {
-    background: #5E0500;
-}
-
 div#bottom {
     position: absolute;
     min-width: 1366px;
@@ -136,6 +132,11 @@ div#div_start_button {
     position: absolute;
     top: 40.28%;
     left: 33.39%;
+    transition: transform 0.7s;
+}
+
+div#div_start_button:hover {
+    transform: scale(1.1);
 }
 
 
@@ -151,6 +152,11 @@ div#div_how_to_button {
     position: absolute;
     top: 51.94%;
     left: 37.99%;
+    transition: transform 0.7s;
+}
+
+div#div_how_to_button:hover {
+    transform: scale(1.1);
 }
 
 p#how_to_text {
@@ -405,11 +411,13 @@ div.alert {
 
 
 
-@media all and (min-width: 1300px) and (min-height: 731.25px) {
+@media all and (min-width: 1000px) and (min-height: 562.5px) {
     div.alert {
         display: none;
     }
 }
+
+
 
 @font-face {
     font-family: SF-Compact-Bold;
