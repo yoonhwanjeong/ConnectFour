@@ -1,4 +1,4 @@
-function Game(socket, board, timer, messageBox) {
+function Game(socket, board, timer, messageBox, audio) {
     console.assert(typeof socket === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof socket);
     console.assert(typeof board === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof board);
     console.assert(typeof timer === "object", "%s: Expected an object but got a %s", arguments.callee.name, typeof timer);
@@ -7,6 +7,7 @@ function Game(socket, board, timer, messageBox) {
     this.board = board;
     this.timer = timer;
     this.messageBox = messageBox;
+    this.audio = audio;
     this.isTurn = false;
 
     this.update = (column, player) => {
@@ -25,6 +26,7 @@ function Game(socket, board, timer, messageBox) {
         }
         if (this.board.isOver()) {
             this.timer.stop();
+            this.audio.pause();
             message = Messages.RESULT;
             if (this.board.hasWinner()) {
                 if (this.board.isWinner(0)) {
@@ -75,19 +77,31 @@ function quitFullscreen() {
 }
 
 (function setup() {
-    var socket = new WebSocket(Setup.WEB_SOCKET_URL);
+    const socket = new WebSocket(Setup.WEB_SOCKET_URL);
 
-    var board = new Board();
-    var timer = new Timer();
-    var messageBox = new MessageBox();
+    const board = new Board();
+    const timer = new Timer();
+    const messageBox = new MessageBox();
+    const audio = new Audio("../data/gameplay.mp3");
 
-    var game = new Game(socket, board, timer, messageBox);
+    const game = new Game(socket, board, timer, messageBox, audio);
+
+    document.getElementById("mute").addEventListener("click", () => {
+        audio.muted = true;
+        document.getElementById("mute").style.display = "none";
+        document.getElementById("unmute").style.display = "block";
+    });
+    document.getElementById("unmute").addEventListener("click", () => {
+        audio.muted = false;
+        document.getElementById("mute").style.display = "block";
+        document.getElementById("unmute").style.display = "none";
+    });
 
     (function registerClickables(game) {
-        var clickables = document.getElementById("clickables").children;
-        for (var i = 0; i < clickables.length; i++) {
-            var item = clickables.item(i);
-            var column = parseInt(item.getAttribute("data-column"));
+        const clickables = document.getElementById("clickables").children;
+        for (let i = 0; i < clickables.length; i++) {
+            const item = clickables.item(i);
+            const column = parseInt(item.getAttribute("data-column"));
             item.onclick = ((game, column) => {
                 return () => game.update(column, 0);
             })(game, column);
@@ -95,15 +109,17 @@ function quitFullscreen() {
     })(game);
 
     socket.onmessage = function (event) {
-        var message = JSON.parse(event.data);
+        const message = JSON.parse(event.data);
         if (message.type === Messages.WAIT.type) {
             messageBox.setMessage(Status["waiting"], false);
         } else if (message.type === Messages.START.type) {
             messageBox.close();
             timer.start();
-            const audio = new Audio("../data/gameplay.mp3");
             audio.loop = true;
-            audio.play();
+            const promise = audio.play();
+            if (promise !== null) {
+                promise.catch(() => audio.play());
+            }
         } else if (message.type === Messages.TURN.type) {
             game.setTurn(message.data);
         } else if (message.type === Messages.PLAY.type) {

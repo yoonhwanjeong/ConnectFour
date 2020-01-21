@@ -8,8 +8,7 @@
     };
 
     exports.START = {
-        type: "START",
-        gameId: null
+        type: "START"
     };
 
     exports.TURN = {
@@ -19,13 +18,11 @@
 
     exports.PLAY = {
         type: "PLAY",
-        gameId: null,
         data: null
     };
 
     exports.RESULT = {
         type: "RESULT",
-        gameId: null,
         data: null
     };
 
