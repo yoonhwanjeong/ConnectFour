@@ -45,20 +45,7 @@ const wsServer = new ws.Server({
     server
 });
 
-const games = {};
-
-setInterval(function () {
-    let count = 0;
-    for (const id in games) {
-        if (Object.prototype.hasOwnProperty.call(games, id)) {
-            if (games[id].states[games[id].state] >= 3) {
-                delete games[id];
-                count++;
-            }
-        }
-    }
-    console.log("[%s] [Server]: Deleted %s finished games", new Date().toTimeString().substring(0, 8), count);
-}, 50000);
+const connections = {};
 
 let currentGame = new Game(statTracker.gamesInitialized++);
 let id = 0;
@@ -67,16 +54,14 @@ wsServer.on("connection", function (socket) {
     const connection = socket;
     connection.id = id++;
     currentGame.addPlayer(connection);
+    connections[connection.id] = currentGame;
 
     console.log("[%s] [Server]: Placed player %s in game %s", new Date().toTimeString().substring(0, 8), connection.id, currentGame.id);
 
     connection.send(JSON.stringify(messages.WAIT));
 
     if (currentGame.hasTwoConnectedPlayers()) {
-        games[currentGame.id] = currentGame;
-        const message = messages.START;
-        message.gameId = currentGame.id;
-        currentGame.announce(JSON.stringify(message));
+        currentGame.announce(JSON.stringify(messages.START));
         const turn = messages.TURN;
         turn.data = true;
         currentGame.players[0].send(JSON.stringify(turn));
@@ -91,7 +76,7 @@ wsServer.on("connection", function (socket) {
     connection.on("message", function incoming(messageString) {
         const message = JSON.parse(messageString);
         if (message.type === messages.PLAY.type || message.type === messages.RESULT.type) {
-            const game = games[message.gameId];
+            const game = connections[connection.id];
             const player = game.players[0].id === connection.id ? 0 : 1;
             if (message.type === "PLAY") {
                 game.players[1 - player].send(messageString);
@@ -121,32 +106,22 @@ wsServer.on("connection", function (socket) {
         console.log("[%s] [Server]: Player %s disconnected", new Date().toTimeString().substring(0, 8), connection.id);
 
         if (code === 1001) {
-            const game = (function () {
-                for (const id in games) {
-                    if (games[id].players.find(value => {
-                        return value.id === connection.id;
-                    }) !== undefined) {
-                        return games[id];
-                    }
-                }
-                return null;
-            })();
-
-            if (game === null && currentGame.states[currentGame.state] === 1) {
-                console.log("[%s] [Server]: Player %s left game %s before having 2 players, thus aborted", new Date().toTimeString().substring(0, 8), connection.id, currentGame.id);
+            const game = connections[connection.id];
+            if (game.states[game.state] === 1) {
+                console.log("[%s] [Server]: Player %s left game %s before start, thus aborted", new Date().toTimeString().substring(0, 8), connection.id, game.id);
                 currentGame = new Game(statTracker.gamesInitialized++);
-            } else if (game !== null && game.states[game.state] < 3) {
-                game.state = "PLAYER LEFT";
-                statTracker.gamesOngoing--;
+            } else if (game.states[game.state] === 2) {
                 console.log("[%s] [Server]: Player %s left game %s before end, thus aborted", new Date().toTimeString().substring(0, 8), connection.id, game.id);
-                game.players.forEach(value => {
+                statTracker.gamesOngoing--;
+                game.players.forEach(currentValue => {
                     try {
-                        value.close();
+                        currentValue.close();
                     } catch (e) {
-                        console.log("[%s] [Server]: Caught exception while closing player %s", new Date().toTimeString().substring(0, 8), value.id);
+                        console.log("[%s] [Server]: Caught exception while closing player %s", new Date().toTimeString().substring(0, 8), currentValue.id);
                     }
                 });
             }
+            delete connections[connection.id];
         }
     });
 });
