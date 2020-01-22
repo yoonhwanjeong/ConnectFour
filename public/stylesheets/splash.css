@@ -326,11 +326,11 @@ p#back_button_text {
     vertical-align: middle;
 }
 
-p.pseudo:before {
+p#pretty_easy:before {
     content: "- ";
 }
 
-p.pseudo:after {
+p#pretty_easy:after {
     content: " -";
 }
 
