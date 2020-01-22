@@ -20,6 +20,7 @@ function Game(socket, board, timer, messageBox, audio) {
             if (player === 0) {
                 message = Messages.PLAY;
                 message.data = column;
+                this.isTurn = false;
                 this.socket.send(JSON.stringify(message));
             }
             new Audio("../data/chip_fall.wav").play();
