@@ -11,7 +11,7 @@ const messages = require("./public/javascripts/messages");
 const statTracker = require("./statTracker");
 const Game = require("./game");
 
-const port = process.argv[2] || process.env.port || 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 app.set("view engine", "ejs");
