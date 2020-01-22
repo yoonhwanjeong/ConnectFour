@@ -39,16 +39,18 @@ function Board() {
         let i;
         let j;
         console.assert(typeof player === "number" && player >= 0 && player < 2, "%s: Expected a number between 0 and 1 but got a %s", arguments.callee.name, typeof player);
-        for (i = 0; i < 4; i++) {
-            for (j = 0; j < 3; j++) {
+        // top left to bottom right
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 4; j++) {
                 if (this.checkFields(player, [[i, j], [i + 1, j + 1], [i + 2, j + 2], [i + 3, j + 3]])) {
                     return true;
                 }
             }
         }
-        for (i = 0; i < 4; i++) {
-            for (j = 6; j > 2; j--) {
-                if (this.checkFields(player, [[i, j], [i + 1, j - 1], [i + 2, j - 2], [i + 3, j - 3]])) {
+        // top right to bottom left
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 4; j++) {
+                if (this.checkFields(player, [[i, j + 3], [i + 1, j + 2], [i + 2, j + 1], [i + 3, j]])) {
                     return true;
                 }
             }
