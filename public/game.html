@@ -150,6 +150,22 @@
                       fill="#fff"></path>
             </svg>
         </div>
+        <div class="pointer button-with-sound" id="chat-icon">
+            <img src="data/chat.png" alt="chat">
+        </div>
+        <div class="pointer button-with-sound" id="chat-alert">
+            <img src="data/alert.png" alt="chat-alert">
+        </div>
+        <div id="chat">
+            <img class="pointer button-with-sound" id="chat-close" src="data/close.png" alt="close">
+            <label>
+                <textarea id="chat-display" readonly></textarea>
+            </label>
+            <label>
+                <textarea id="chat-input"></textarea>
+            </label>
+            <button class="button-with-sound" id="chat-send">Send</button>
+        </div>
     </div>
     <script src="javascripts/config.js"></script>
     <script src="javascripts/statuses.js"></script>

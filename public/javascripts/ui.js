@@ -157,3 +157,54 @@ function Timer() {
         }
     };
 }
+
+function Chat(socket) {
+    document.getElementById("chat-display").value = "";
+    document.getElementById("chat-input").value = "";
+    document.getElementById("chat-icon").addEventListener("click", () => {
+        this.open();
+    });
+    document.getElementById("chat-alert").addEventListener("click", () => {
+        this.open();
+    });
+    document.getElementById("chat-close").addEventListener("click", () => {
+        this.close();
+    });
+    document.getElementById("chat-input").addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            this.send();
+        }
+    });
+    document.getElementById("chat-send").addEventListener("click", () => {
+        this.send();
+    });
+    this.open = () => {
+        document.getElementById("chat-icon").style.display = "none";
+        document.getElementById("chat").style.display = "block";
+        document.getElementById("chat-alert").style.display = "none";
+    };
+    this.close = () => {
+        document.getElementById("chat").style.display = "none";
+        document.getElementById("chat-icon").style.display = "block";
+    };
+    this.send = () => {
+        document.getElementById("chat-display").value += "You: " + document.getElementById("chat-input").value + "\n";
+        document.getElementById("chat-display").scrollTop = document.getElementById("chat-display").scrollHeight;
+        Messages.CHAT.data = document.getElementById("chat-input").value;
+        socket.send(JSON.stringify(Messages.CHAT));
+        document.getElementById("chat-input").value = "";
+    };
+    this.showIcon = () => {
+        document.getElementById("chat-icon").style.display = "block";
+    };
+    this.append = (message) => {
+        document.getElementById("chat-display").value += message;
+    };
+    this.isOpened = () => {
+        return document.getElementById("chat").style.display === "block";
+    };
+    this.showAlert = () => {
+        document.getElementById("chat-alert").style.display = "block";
+    };
+}

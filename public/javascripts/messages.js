@@ -29,4 +29,9 @@
     exports.ERROR = {
         type: "ERROR"
     };
+
+    exports.CHAT = {
+        type: "CHAT",
+        data: null
+    };
 })(typeof exports === "undefined" ? this.Messages = {} : exports);

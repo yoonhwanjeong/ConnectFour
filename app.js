@@ -75,7 +75,7 @@ wsServer.on("connection", function (socket) {
 
     connection.on("message", function incoming(messageString) {
         const message = JSON.parse(messageString);
-        if (message.type === messages.PLAY.type || message.type === messages.RESULT.type) {
+        if (message.type === messages.PLAY.type || message.type === messages.RESULT.type || message.type === messages.CHAT.type) {
             const game = connections[connection.id];
             const player = game.players[0].id === connection.id ? 0 : 1;
             if (message.type === "PLAY") {
@@ -98,6 +98,8 @@ wsServer.on("connection", function (socket) {
                 statTracker.gamesOngoing--;
                 statTracker.hoursPlayed += game.getHoursPlayed();
                 console.log("[%s] [Server]: State of game %s was set to %s", new Date().toTimeString().substring(0, 8), game.id, game.state);
+            } else if (message.type === messages.CHAT.type) {
+                game.players[1 - player].send(messageString);
             }
         }
     });

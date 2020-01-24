@@ -84,6 +84,7 @@ function quitFullscreen() {
     const timer = new Timer();
     const messageBox = new MessageBox();
     const audio = new Audio("../data/gameplay.mp3");
+    const chat = new Chat(socket);
 
     const game = new Game(socket, board, timer, messageBox, audio);
 
@@ -121,10 +122,16 @@ function quitFullscreen() {
             if (promise !== null) {
                 promise.catch(() => audio.play());
             }
+            chat.showIcon();
         } else if (message.type === Messages.TURN.type) {
             game.setTurn(message.data);
         } else if (message.type === Messages.PLAY.type) {
             game.update(message.data, 1);
+        } else if (message.type === Messages.CHAT.type) {
+            chat.append("Opponent: " + message.data + "\n");
+            if (!chat.isOpened()) {
+                chat.showAlert();
+            }
         }
     };
 
