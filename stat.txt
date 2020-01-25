@@ -1,0 +1,2 @@
+gamesCompleted: 0
+minutesPlayed: 0

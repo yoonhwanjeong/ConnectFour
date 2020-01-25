@@ -34,8 +34,8 @@ game.prototype.announce = function (message) {
     this.players.forEach(player => player.send(message));
 };
 
-game.prototype.getHoursPlayed = function () {
-    return Number.parseFloat(((this.endTime - this.startTime) / 3600000).toFixed(1));
+game.prototype.getMinutesPlayed = function () {
+    return parseFloat(((this.endTime - this.startTime) / 60000).toFixed(1));
 };
 
 module.exports = game;

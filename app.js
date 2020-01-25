@@ -14,6 +14,13 @@ const Game = require("./game");
 const port = process.env.PORT || 3000;
 const app = express();
 
+const fs = require("fs");
+
+const stat = fs.readFileSync("./stat.txt").toString();
+statTracker.gamesCompleted = parseInt(stat.substring(16, stat.indexOf("\n")));
+statTracker.minutesPlayed = parseFloat(stat.substring(stat.indexOf("\n") + 15));
+console.log("[%s] [Server]: Loaded stats from stat.txt", getTime());
+
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser(credentials.cookieSecret));
@@ -36,7 +43,7 @@ app.get("/", (req, res) => {
         gamesCompleted: statTracker.gamesCompleted,
         gamesOngoing: statTracker.gamesOngoing,
         timesVisited: session.timesVisited,
-        hoursPlayed: statTracker.hoursPlayed
+        minutesPlayed: statTracker.minutesPlayed
     });
 });
 
@@ -56,7 +63,7 @@ wsServer.on("connection", function (socket) {
     currentGame.addPlayer(connection);
     connections[connection.id] = currentGame;
 
-    console.log("[%s] [Server]: Placed player %s in game %s", new Date().toTimeString().substring(0, 8), connection.id, currentGame.id);
+    console.log("[%s] [Server]: Placed player %s in game %s", getTime(), connection.id, currentGame.id);
 
     connection.send(JSON.stringify(messages.WAIT));
 
@@ -68,9 +75,9 @@ wsServer.on("connection", function (socket) {
         turn.data = false;
         currentGame.players[1].send(JSON.stringify(turn));
         currentGame.startTime = Date.now();
-        currentGame = new Game(statTracker.gamesInitialized++);
         statTracker.gamesOngoing++;
-        console.log("[%s] [Server]: Started game %s", new Date().toTimeString().substring(0, 8), currentGame.id);
+        console.log("[%s] [Server]: Started game %s", getTime(), currentGame.id);
+        currentGame = new Game(statTracker.gamesInitialized++);
     }
 
     connection.on("message", function incoming(messageString) {
@@ -96,8 +103,8 @@ wsServer.on("connection", function (socket) {
                 game.endTime = Date.now();
                 statTracker.gamesCompleted++;
                 statTracker.gamesOngoing--;
-                statTracker.hoursPlayed += game.getHoursPlayed();
-                console.log("[%s] [Server]: State of game %s was set to %s", new Date().toTimeString().substring(0, 8), game.id, game.state);
+                statTracker.minutesPlayed += game.getMinutesPlayed();
+                console.log("[%s] [Server]: State of game %s was set to %s", getTime(), game.id, game.state);
             } else if (message.type === messages.CHAT.type) {
                 game.players[1 - player].send(messageString);
             }
@@ -105,21 +112,21 @@ wsServer.on("connection", function (socket) {
     });
 
     connection.on("close", function (code) {
-        console.log("[%s] [Server]: Player %s disconnected", new Date().toTimeString().substring(0, 8), connection.id);
+        console.log("[%s] [Server]: Player %s disconnected", getTime(), connection.id);
 
         if (code === 1001) {
             const game = connections[connection.id];
             if (game.states[game.state] === 1) {
-                console.log("[%s] [Server]: Player %s left game %s before start, thus aborted", new Date().toTimeString().substring(0, 8), connection.id, game.id);
+                console.log("[%s] [Server]: Player %s left game %s before start, thus aborted", getTime(), connection.id, game.id);
                 currentGame = new Game(statTracker.gamesInitialized++);
             } else if (game.states[game.state] === 2) {
-                console.log("[%s] [Server]: Player %s left game %s before end, thus aborted", new Date().toTimeString().substring(0, 8), connection.id, game.id);
+                console.log("[%s] [Server]: Player %s left game %s before end, thus aborted", getTime(), connection.id, game.id);
                 statTracker.gamesOngoing--;
                 game.players.forEach(currentValue => {
                     try {
                         currentValue.close();
                     } catch (e) {
-                        console.log("[%s] [Server]: Caught exception while closing player %s", new Date().toTimeString().substring(0, 8), currentValue.id);
+                        console.log("[%s] [Server]: Caught exception while closing player %s", getTime(), currentValue.id);
                     }
                 });
             }
@@ -128,4 +135,14 @@ wsServer.on("connection", function (socket) {
     });
 });
 server.listen(port);
-console.log("[%s] [Server]: Started server on %s", new Date().toTimeString().substring(0, 8), port);
+console.log("[%s] [Server]: Started server on %s", getTime(), port);
+
+process.on("SIGINT", () => {
+    fs.writeFileSync("./stat.txt", "gamesCompleted: " + statTracker.gamesCompleted + "\nminutesPlayed: " + statTracker.minutesPlayed);
+    console.log("[%s] [Server]: Saved current stats to stat.txt", getTime());
+    process.exit(0);
+});
+
+function getTime() {
+    return new Date().toTimeString().substring(0, 8);
+}
